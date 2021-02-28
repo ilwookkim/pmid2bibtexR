@@ -1,6 +1,6 @@
 # **pmid2bibtexR**
 
-Retrieve BibTeX format from PMID with R
+Converting Pubmed PMID to BibTeX format in R using biopython module
 
 ## **Require**
 
