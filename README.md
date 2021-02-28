@@ -4,7 +4,7 @@ Retrieve BibTeX format from PMID with R
 
 ## **Require**
 
-This package needs pre-installed **python3** (>= 3.9.2) and python module: **Biopython**
+This package needs pre-installed **python3** and python module: **Biopython**
 Pubmed allows only 3 requests per second without API Key, but 10 requests per second with API Key. See the [details](https://ncbiinsights.ncbi.nlm.nih.gov/2017/11/02/new-api-keys-for-the-e-utilities). Please use API Key, if possible.
 
 **Debian/Ubuntu**
