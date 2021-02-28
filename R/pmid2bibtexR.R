@@ -14,7 +14,7 @@
 #' @import reticulate
 
 pmid2bibtexR <- function(pmid, myemail = "user@example.com", myapikey = NULL, n_author = "all"){
-  source_python("./py_pkg/pmid2bibtexR.py")
+  source_python(paste(system.file(package="pmid2bibtexR"), "pmid2bibtexR.py", sep="/"))
   bib <- pmid2bibtexR(pmid, myemail= myemail, myapikey = myapikey, n_author = n_author)
   return(bib)
 }
