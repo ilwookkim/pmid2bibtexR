@@ -78,8 +78,8 @@ pmid2bibtexR <- function(pmid, myemail = "user@example.com", myapikey = NULL, n_
         }
         Author <- paste(Author, sep = "", collapse = " and ")
         print(paste0(pmid[i],": Done"))
-      } else {cat(paste0("n_author needs number or \"all\""))}
-    } else { print(paste0("Check the PMID: ", pmid[i])) }
+      }
+    }
     bib = paste0(bib,"@Article{",cited,",\n \tAuthor={",Author,"},\n \tTitle={",Title,"},\n \tJournal={",Journal,"},\n \tYear={",Year)
     tryCatch({
       bib = paste0(bib,"},\n \tVolume={",Volume)

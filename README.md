@@ -62,5 +62,33 @@ bibtex.bib file contains BibTeX format as below:
 
 ```
 
+When n_author = 3.
+``` r
+bib <- pmid2bibtexR(pmid, myemail = "user@example.com", myapikey = NULL, n_author = 3)
+write(bib, "./bibtex.bib")
+```
+
+```
+@Article{pmid21146710,
+ 	Author={Kang MH and Kim IW and Lee DW and Others},
+ 	Title={Development of a rapid detection method to detect tdh gene in Vibrio parahaemolyticus using 2-step ultrarapid real-time polymerase chain reaction.},
+ 	Journal={Diagn Microbiol Infect Dis},
+ 	Year={2011},
+ 	Volume={69},
+ 	Number={1},
+ 	Pages={21-9},
+ 	PMID={21146710}
+}
+@Article{pmid20364295,
+ 	Author={Kim IW and Kang MH and Kwon SH and and Others},
+ 	Title={Rapid detection of virulence stx2 gene of Enterohemorrhagic Escherichia coli using two-step ultra-rapid real-time PCR.},
+ 	Journal={Biotechnol Lett},
+ 	Year={2010},
+ 	Volume={32},
+ 	Number={5},
+ 	Pages={681-8},
+ 	PMID={20364295}
+}
+```
 
 
