@@ -48,7 +48,7 @@ bibtex.bib file contains BibTeX format as below:
  	Title={Development of a rapid detection method to detect tdh gene in Vibrio parahaemolyticus using 2-step ultrarapid real-time polymerase chain reaction.},
  	Journal={Diagn Microbiol Infect Dis},
  	Year={2011},
- 	 Volume={69},
+ 	Volume={69},
  	Number={1},
  	Pages={21-9},
  	PMID={21146710}
@@ -58,7 +58,7 @@ bibtex.bib file contains BibTeX format as below:
  	Title={Rapid detection of virulence stx2 gene of Enterohemorrhagic Escherichia coli using two-step ultra-rapid real-time PCR.},
  	Journal={Biotechnol Lett},
  	Year={2010},
- 	 Volume={32},
+ 	Volume={32},
  	Number={5},
  	Pages={681-8},
  	PMID={20364295}

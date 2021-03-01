@@ -12,8 +12,85 @@
 #' @export
 #' @import reticulate
 
-pmid2bibtexR <- function(pmid, myemail = "user@example.com", myapikey = NULL, n_author = "all"){
-  source_python(paste(system.file(package="pmid2bibtexR"), "pmid2bibtexR.py", sep="/"))
-  bib <- pmid2bibtexR(pmid, myemail= myemail, myapikey = myapikey, n_author = n_author)
+pmid2bibtexR <- function(pmid, myemail = "user@example.com", myapikey = NULL, n_author = "all" ){
+  Bio <- import("Bio")
+  ez <- Bio$Entrez
+  ez$email = myemail
+  bib=""
+  for (i in 1:length(pmid)) {
+    cited = ""
+    Title = ""
+    Journal = ""
+    Year = ""
+    Volume = ""
+    Number = ""
+    Pages = ""
+    PMID = ""
+    Author = as.list(NULL)
+    tryCatch({
+      if(!is.null(myapikey)){
+        pubmed_entry = ez$efetch(apikey= myapikey, db="pubmed", id=paste0(round(pmid[i])), retmode="xml")
+      } else {
+        pubmed_entry = ez$efetch(db="pubmed", id=paste0(round(pmid[i])), retmode="xml")
+        print("Run without API Key")
+      }}, error = function(e) print("Error: Check the Pubmed api key"))
+    if(!is.null(pubmed_entry)){
+      result = ez$read(pubmed_entry)
+      cited = paste0("pmid",round(pmid[i]))
+      Title = result['PubmedArticle'][[1]]['MedlineCitation']['Article']['ArticleTitle']
+      Journal = result['PubmedArticle'][[1]]['MedlineCitation']['Article']['Journal']['ISOAbbreviation']
+      Year = result['PubmedArticle'][[1]]['MedlineCitation']['Article']['Journal']['JournalIssue']['PubDate']['Year']
+      tryCatch({
+        Volume = result['PubmedArticle'][[1]]['MedlineCitation']['Article']['Journal']['JournalIssue']['Volume']
+      }, error = function(e) e)
+      tryCatch({
+        Number = result['PubmedArticle'][[1]]['MedlineCitation']['Article']['Journal']['JournalIssue']['Issue']
+      }, error = function(e) e)
+      tryCatch({
+        Pages = result['PubmedArticle'][[1]]['MedlineCitation']['Article']['Pagination']['MedlinePgn']
+      }, error = function(e) e)
+      PMID = paste0(round(pmid[i]))
+      author_len <- length(result['PubmedArticle'][[1]]['MedlineCitation']['Article']['AuthorList'])-1
+      if(is.numeric(n_author)){
+        print(paste0("n_author: ", n_author))
+        if(n_author < author_len){
+          Author = as.list(NULL)
+          for (j in 1:n_author) {
+            s=""
+            s=paste0(result['PubmedArticle'][[1]]['MedlineCitation']['Article']['AuthorList'][j]['LastName']," ",result['PubmedArticle'][[1]]['MedlineCitation']['Article']['AuthorList'][j]['Initials'] )
+            Author[j] <- s
+          }
+          Author <- paste(Author, sep = "", collapse = " and ")
+          Author <- paste0(Author, " and Others")
+        } else if(n_author >= author_len){
+          for (j in 1:author_len) {
+            s=""
+            s=paste0(result['PubmedArticle'][[1]]['MedlineCitation']['Article']['AuthorList'][j]['LastName']," ",result['PubmedArticle'][[1]]['MedlineCitation']['Article']['AuthorList'][j]['Initials'] )
+            Author[j] <- s
+          }
+          Author <- paste(Author, sep = "", collapse = " and ")
+        }
+      } else if(n_author == "all") {
+        for (j in 1:author_len) {
+          s=""
+          s=paste0(result['PubmedArticle'][[1]]['MedlineCitation']['Article']['AuthorList'][j]['LastName']," ",result['PubmedArticle'][[1]]['MedlineCitation']['Article']['AuthorList'][j]['Initials'] )
+          Author[j] <- s
+        }
+        Author <- paste(Author, sep = "", collapse = " and ")
+        print(paste0(pmid[i],": Done"))
+      } else {cat(paste0("n_author needs number or \"all\""))}
+    } else { print(paste0("Check the PMID: ", pmid[i])) }
+    bib = paste0(bib,"@Article{",cited,",\n \tAuthor={",Author,"},\n \tTitle={",Title,"},\n \tJournal={",Journal,"},\n \tYear={",Year)
+    tryCatch({
+      bib = paste0(bib,"},\n \tVolume={",Volume)
+    }, error = function(e) e)
+    tryCatch({
+      bib = paste0(bib,"},\n \tNumber={",Number)
+    }, error = function(e) e)
+    tryCatch({
+      bib = paste0(bib,"},\n \tPage={",Pages)
+    }, error = function(e) e)
+    bib =paste0(bib,"},\n \tPMID={",PMID,"}\n}\n")
+  }
   return(bib)
 }
