@@ -1,3 +1,7 @@
+<!-- badges: start -->
+  [![R-CMD-check](https://github.com/ilwookkim/pmid2bibtexR/workflows/R-CMD-check/badge.svg)](https://github.com/ilwookkim/pmid2bibtexR/actions)
+  <!-- badges: end -->
+
 # **pmid2bibtexR**
 
 Converting Pubmed PMID to BibTeX format in R using biopython module
