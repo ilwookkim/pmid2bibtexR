@@ -36,7 +36,7 @@ devtools::install_github("ilwookkim/pmid2bibtexR")
 ``` r
 library(pmid2bibtexR)
 pmid <- c(21146710, 20364295)
-bib <- pmid2bibtexR(pmid, myemail = "user@@example.com", myapikey = NULL, n_author = "all")
+bib <- pmid2bibtexR(pmid, myemail = "user@example.com", myapikey = NULL, n_author = "all")
 write(bib, "./bibtex.bib")
 ```
 
