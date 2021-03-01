@@ -5,7 +5,7 @@ Converting Pubmed PMID to BibTeX format in R using biopython module
 ## **Require**
 
 This package needs pre-installed **python3** and python module: **Biopython**
-Pubmed allows only 3 requests per second without API Key, but 10 requests per second with API Key. See the [details](https://ncbiinsights.ncbi.nlm.nih.gov/2017/11/02/new-api-keys-for-the-e-utilities). Please use API Key, if possible.
+Pubmed allows only 3 requests per second without API Key, but 10 requests per second with API Key. See the [details](https://ncbiinsights.ncbi.nlm.nih.gov/2017/11/02/new-api-keys-for-the-e-utilities). It is generally recommended to use the API Key, when you have more than 3 PMIDs.
 
 **Debian/Ubuntu**
 ``` colsole
