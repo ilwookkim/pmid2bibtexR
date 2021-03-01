@@ -26,5 +26,4 @@ This function allows the user to get BibTeX format from PMID using Entrez from b
 \examples{
 pmid <- c(21146710, 20364295)
 bib <- pmid2bibtexR(pmid, myemail = "user@example.com", myapikey = NULL, n_author = "all")
-write(bib, "./bibtex.bib")
 }

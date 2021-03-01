@@ -9,7 +9,6 @@
 #' @examples
 #' pmid <- c(21146710, 20364295)
 #' bib <- pmid2bibtexR(pmid, myemail = "user@@example.com", myapikey = NULL, n_author = "all")
-#' write(bib, "./bibtex.bib")
 #' @export
 #' @import reticulate
 
