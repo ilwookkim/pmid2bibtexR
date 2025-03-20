@@ -4,19 +4,10 @@
 \alias{pmid2bibtexR}
 \title{pmid2bibtexR}
 \usage{
-pmid2bibtexR(
-  pmid,
-  myemail = "user@example.com",
-  myapikey = NULL,
-  n_author = "all"
-)
+pmid2bibtexR(pmid = c(20364295, 21146710), n_author = "all")
 }
 \arguments{
 \item{pmid}{list of pubmed PMID}
-
-\item{myemail}{Bio.Entrez needs e-mail address of user.}
-
-\item{myapikey}{Pubmed allows only 3 requests per second without API Key. Default to None. 10 requests per second with API Key. See the details: https://ncbiinsights.ncbi.nlm.nih.gov/2017/11/02/new-api-keys-for-the-e-utilities/}
 
 \item{n_author}{Number of Authors to see in BibTeX format. Default to "all"}
 }
@@ -25,5 +16,5 @@ This function allows the user to get BibTeX format from PMID using Entrez from b
 }
 \examples{
 pmid <- c(21146710, 20364295)
-bib <- pmid2bibtexR(pmid, myemail = "user@example.com", myapikey = NULL, n_author = "all")
+bib <- pmid2bibtexR(pmid, n_author = "all")
 }
